@@ -1,0 +1,14 @@
+
+
+Criar um prontuário envolve inserir dados em duas tabelas. Como isso é feito várias vezes, usar uma procedure automatiza e evita erros.
+INSERT INTO Prontuario (dataProntuario, descricao, condicaoRestricao)
+VALUES ('2025-09-03', 'Consulta de acompanhamento', 'Sem restrições');
+
+-- Pega o último ID inserido
+SELECT last_insert_rowid() AS novoID;
+
+-- Suponha que novoID foi capturado no seu código backend, aí insere na fazProntuario
+INSERT INTO fazProntuario (CPFProfissional, RAaluno, IDprontuario)
+VALUES ('123.456.789-00', 'A123456', last_insert_rowid());
+
+Insere um novo prontuário e já vincula ele ao profissional e ao aluno automaticamente.
