@@ -1,0 +1,11 @@
+
+Para garantir que, quando um prontuário for apagado, todos os registros ligados a ele na tabela fazProntuario também sejam apagados, evitando dados incompletos.
+Código do trigger:
+CREATE TRIGGER trg_delete_fazProntuario
+BEFORE DELETE ON Prontuario
+FOR EACH ROW
+BEGIN
+  DELETE FROM fazProntuario WHERE IDprontuario = OLD.ID;
+END;
+
+O trigger roda antes de apagar um prontuário e exclui automaticamente todas as ligações desse prontuário na tabela fazProntuario.
