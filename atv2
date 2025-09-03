@@ -1,0 +1,16 @@
+CONSULTA COM 3 ENTIDADES
+
+Listar os prontuários realizados por cada profissional para cada aluno, trazendo detalhes para acompanhar o histórico de atendimento e quem realizou cada sessão.
+
+SELECT 
+  Profissional.nome AS nome_profissional,
+  Aluno.nome AS nome_aluno,
+  Prontuario.dataProntuario,
+  Prontuario.descricao
+FROM fazProntuario
+JOIN Profissional ON fazProntuario.CPFProfissional = Profissional.CPF
+JOIN Aluno ON fazProntuario.RAaluno = Aluno.RA
+JOIN Prontuario ON fazProntuario.IDprontuario = Prontuario.ID;
+
+A consulta retorna uma lista com o nome do profissional, nome do aluno, data do prontuário e descrição do atendimento. 
+Isso permite ao sistema apresentar o histórico completo das sessões associadas aos alunos e profissionais, útil para relatórios e acompanhamento no back-end.
