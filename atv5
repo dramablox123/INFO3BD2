@@ -1,0 +1,13 @@
+
+No sistema, é frequente precisar verificar se um aluno possui algum responsável cadastrado antes de liberar certas ações,
+como autorizar atendimento ou envio de notificações. Encapsular essa lógica numa função facilita a reutilização e mantém o código mais limpo e consistente.
+
+SELECT 
+  CASE 
+    WHEN EXISTS (
+      SELECT 1 FROM alunoPossuiResponsavel WHERE RAAluno = ?
+    ) THEN 1
+    ELSE 0
+  END AS tem_responsavel;
+
+A função recebe o RA do aluno e retorna 1 se o aluno tiver pelo menos um responsável cadastrado, ou 0 caso contrário.
