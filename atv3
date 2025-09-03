@@ -1,0 +1,17 @@
+Código para criar a view:
+
+Retorna a lista de atendimentos com o nome do profissional, nome do aluno, data e descrição da consulta.
+
+CREATE VIEW vw_HistoricoAtendimento AS
+SELECT 
+  Profissional.nome AS nome_profissional,
+  Aluno.nome AS nome_aluno,
+  Prontuario.dataProntuario,
+  Prontuario.descricao
+FROM fazProntuario
+JOIN Profissional ON fazProntuario.CPFProfissional = Profissional.CPF
+JOIN Aluno ON fazProntuario.RAaluno = Aluno.RA
+JOIN Prontuario ON fazProntuario.IDprontuario = Prontuario.ID;
+
+Essa consulta é usada com muita frequência para mostrar o histórico de atendimentos entre profissionais e alunos.
+Criar uma view facilita o acesso a esses dados e evita repetir a mesma consulta várias vezes no sistema.
