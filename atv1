@@ -1,0 +1,27 @@
+CONSULTA 1
+
+Contar quantos prontuários cada profissional fez, para monitorar a carga de trabalho e distribuição dos atendimentos entre profissionais.
+
+SELECT P.nome, COUNT(FP.IDprontuario) AS total_prontuarios
+FROM Profissional P
+LEFT JOIN fazProntuario FP ON P.CPF = FP.CPFProfissional
+GROUP BY P.nome;
+
+A consulta retorna o nome do profissional junto com a quantidade total de prontuários que ele fez, permitindo avaliar o número de atendimentos realizados por cada profissional.
+
+
+
+CONSULTA 2
+
+Calcular a média de prontuários realizados por aluno para entender a frequência de atendimento dos alunos.
+
+SELECT A.nome, AVG(contagem) AS media_prontuarios
+FROM (
+    SELECT RAaluno, COUNT(IDprontuario) AS contagem
+    FROM fazProntuario
+    GROUP BY RAaluno
+) AS sub
+JOIN Aluno A ON sub.RAaluno = A.RA
+GROUP BY A.nome;
+
+Retorna a média de prontuários associados a cada aluno, permitindo identificar alunos com mais ou menos acompanhamento e ajustar a frequência de atendimento conforme necessidade.
